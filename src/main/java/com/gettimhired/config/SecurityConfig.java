@@ -8,17 +8,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
 
     private final CustomUserDetailsService customUserDetailsService;
-    private final FormUserDetailsService formUserDetailsService;
-    public SecurityConfig(CustomUserDetailsService customUserDetailsService, FormUserDetailsService formUserDetailsService) {
+    public SecurityConfig(CustomUserDetailsService customUserDetailsService) {
         this.customUserDetailsService = customUserDetailsService;
-        this.formUserDetailsService = formUserDetailsService;
     }
 
     @Bean
@@ -40,32 +37,7 @@ public class SecurityConfig {
                     authorize.requestMatchers("/graphql").authenticated();
                 })
                 .userDetailsService(customUserDetailsService)
-                .addFilterBefore(new RequestContextFilter(), BasicAuthenticationFilter.class)
-                .build();
-    }
-
-    @Bean
-    @Order(1)
-    @Profile("!local")
-    public SecurityFilterChain filterChainForm(HttpSecurity http) throws Exception {
-        return http
-                .requiresChannel(channel ->
-                        channel.anyRequest().requiresSecure())
-                .formLogin(formLogin -> {
-                    formLogin.defaultSuccessUrl("/account");
-                })
-                .logout(logout -> {
-                    logout.logoutSuccessUrl("/");
-                })
-                .httpBasic(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/account").authenticated();
-                    authorize.requestMatchers("/postman").authenticated();
-                    authorize.requestMatchers("/swagger-ui/**").authenticated();
-                    authorize.anyRequest().permitAll();
-                })
-                .userDetailsService(formUserDetailsService)
-                .addFilterBefore(new RequestContextFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new AuthorizationHeaderFilter(), BasicAuthenticationFilter.class)
                 .build();
     }
 
@@ -87,31 +59,7 @@ public class SecurityConfig {
                     authorize.requestMatchers("/graphql").authenticated();
                 })
                 .userDetailsService(customUserDetailsService)
-                .addFilterBefore(new RequestContextFilter(), BasicAuthenticationFilter.class)
-                .build();
-    }
-
-    @Bean
-    @Order(1)
-    @Profile("local")
-    public SecurityFilterChain filterChainLocalForm(HttpSecurity http) throws Exception {
-        return http
-                .formLogin(formLogin -> {
-                    formLogin.defaultSuccessUrl("/account");
-                    formLogin.loginPage("/login");
-                })
-                .logout(logout -> {
-                    logout.logoutSuccessUrl("/");
-                })
-                .httpBasic(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers("/account").authenticated();
-                    authorize.requestMatchers("/postman").authenticated();
-                    authorize.requestMatchers("/swagger-ui/**").authenticated();
-                    authorize.anyRequest().permitAll();
-                })
-                .userDetailsService(formUserDetailsService)
-                .addFilterBefore(new RequestContextFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new AuthorizationHeaderFilter(), BasicAuthenticationFilter.class)
                 .build();
     }
 }
