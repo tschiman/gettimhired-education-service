@@ -1,0 +1,93 @@
+type Query {
+    getCandidates: [Candidate]
+    getCandidateById(id: ID!): Candidate
+
+    getJobs(candidateId: String!): [Job]
+    getJobById(id: ID!, candidateId: String!): Job
+
+    getEducations(candidateId: String!): [Education]
+    getEducationById(id: ID!): Education
+}
+
+type Mutation {
+    createCandidate(candidate: CandidateInput): Candidate
+    updateCandidate(candidate: CandidateInput): Candidate
+    deleteCandidate(id: String): Boolean
+
+    createJob(job: JobInput): Job
+    updateJob(job: JobInput): Job
+    deleteJob(id: String, candidateId: String): Boolean
+
+    createEducation(education: EducationInput): Education
+    updateEducation(education: EducationInput): Education
+    deleteEducation(id: String): Boolean
+}
+
+type Education {
+    id: ID!
+    userId: String!
+    candidateId: String!
+    name: String!
+    startDate: String
+    endDate: String
+    graduated: Boolean
+    areaOfStudy: String
+    educationLevel: String!
+}
+input EducationInput {
+    id: ID
+    userId: String
+    candidateId: String!
+    name: String!
+    startDate: String
+    endDate: String
+    graduated: Boolean
+    areaOfStudy: String!
+    educationLevel: String!
+}
+
+type Candidate {
+    id: ID!
+    userId: String!
+    firstName: String!
+    lastName: String!
+    summary: String
+    linkedInUrl: String
+    githubUrl: String
+}
+input CandidateInput {
+    id: String
+    userId: String
+    firstName: String!
+    lastName: String!
+    summary: String
+    linkedInUrl: String
+    githubUrl: String
+}
+
+type Job {
+    id: ID!
+    userId: String!
+    candidateId: String!
+    companyName: String
+    title: String
+    startDate: String
+    endDate: String
+    skills: [String]
+    achievements: [String]
+    currentlyWorking: Boolean
+    reasonForLeaving: String
+}
+input JobInput {
+    id: ID
+    userId: String
+    candidateId: String!
+    companyName: String
+    title: String
+    startDate: String
+    endDate: String
+    skills: [String]
+    achievements: [String]
+    currentlyWorking: Boolean
+    reasonForLeaving: String
+}

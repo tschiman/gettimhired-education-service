@@ -1,0 +1,1796 @@
+{
+	"info": {
+		"_postman_id": "1c695caf-eaec-41a0-ad5d-a3eaeb4d76da",
+		"name": "gettimhired.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "353041"
+	},
+	"item": [
+		{
+			"name": "REST",
+			"item": [
+				{
+					"name": "Candidate",
+					"item": [
+						{
+							"name": "Create Candidate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"CANDIDATE_ID\", pm.response.json().id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"firstName\",\r\n    \"lastName\": \"lastName\",\r\n    \"summary\": \"summary\",\r\n    \"linkedInUrl\": null,\r\n    \"githubUrl\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/candidates",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Candidates",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"CANDIDATE_ID\", pm.response.json()[0].id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{HOST}}/api/candidates",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Candidate by ID",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Candidate By Id",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\": \"firstName\",\r\n    \"lastName\": \"lastName\",\r\n    \"summary\": \"summary\",\r\n    \"linkedInUrl\": null,\r\n    \"githubUrl\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Candidate by ID",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Education",
+					"item": [
+						{
+							"name": "Create Education",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"EDUCATION_ID\", pm.response.json().id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"name\",\r\n    \"graduated\": true,\r\n    \"areaOfStudy\": \"areaOfStudy\",\r\n    \"educationLevel\": \"BACHELORS\",/*NONE,SELF_TAUGHT,DIPLOMA,CERTIFICATE,BACHELORS,MASTERS,DOCTORATE*/\r\n    \"startDate\": \"2004-08-01\",\r\n    \"endDate\": \"2007-12-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}/educations",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}",
+										"educations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Educations",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"EDUCATION_ID\", pm.response.json()[0].id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true,
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}/educations",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}",
+										"educations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Education by ID",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}/educations/{{EDUCATION_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}",
+										"educations",
+										"{{EDUCATION_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Education By Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"EDUCATION_ID\", pm.response.json().id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"name\",\r\n    \"graduated\": true,\r\n    \"areaOfStudy\": \"areaOfStudy\",\r\n    \"educationLevel\": \"BACHELORS\",/*NONE,SELF_TAUGHT,DIPLOMA,CERTIFICATE,BACHELORS,MASTERS,DOCTORATE*/\r\n    \"startDate\": \"2004-08-01\",\r\n    \"endDate\": \"2007-12-01\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}/educations/{{EDUCATION_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}",
+										"educations",
+										"{{EDUCATION_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Education by ID",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}/educations/{{EDUCATION_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}",
+										"educations",
+										"{{EDUCATION_ID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Job",
+					"item": [
+						{
+							"name": "Create Job",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"JOB_ID\", pm.response.json().id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"companyName\": \"companyName\",\r\n    \"title\": \"title\",\r\n    \"startDate\": \"2023-08-01\",\r\n    \"endDate\": \"2023-09-01\",\r\n    \"skills\": [\r\n        \"skill\"\r\n    ],\r\n    \"achievements\": [\r\n        \"achievement\"\r\n    ],\r\n    \"currentlyWorking\": true,\r\n    \"reasonForLeaving\": \"reasonForLeaving\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}/jobs",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}",
+										"jobs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All Jobs",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"JOB_ID\", pm.response.json()[0].id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}/jobs",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}",
+										"jobs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Job by ID",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}/jobs/{{JOB_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}",
+										"jobs",
+										"{{JOB_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Job By Id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.environment.set(\"JOB_ID\", pm.response.json().id);"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"companyName\": \"companyName\",\r\n    \"title\": \"title\",\r\n    \"startDate\": \"2023-08-01\",\r\n    \"endDate\": \"2023-09-01\",\r\n    \"skills\": [\r\n        \"skill\"\r\n    ],\r\n    \"achievements\": [\r\n        \"achievement\"\r\n    ],\r\n    \"currentlyWorking\": true,\r\n    \"reasonForLeaving\": \"reasonForLeaving\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}/jobs/{{JOB_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}",
+										"jobs",
+										"{{JOB_ID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Job by ID",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{HOST}}/api/candidates/{{CANDIDATE_ID}}/educations/{{JOB_ID}}",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"api",
+										"candidates",
+										"{{CANDIDATE_ID}}",
+										"educations",
+										"{{JOB_ID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "GraphQL",
+			"item": [
+				{
+					"name": "candidate",
+					"item": [
+						{
+							"name": "create candidate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"CANDIDATE_ID\", pm.response.json().data.createCandidate.id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  createCandidate(candidate: {\r\n    id:\"\", \r\n    userId:\"\", \r\n    firstName: \"firstName\", \r\n    lastName: \"lastName\", \r\n    summary: \"summary\",\r\n    linkedInUrl: null,\r\n    githubUrl: null\r\n}) {\r\n    id\r\n    userId\r\n    firstName\r\n    lastName\r\n    summary\r\n    linkedInUrl\r\n    githubUrl\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query candidate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"CANDIDATE_ID\", pm.response.json().data.getCandidates[0].id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n  getCandidates {\r\n    id\r\n    userId\r\n    firstName\r\n    lastName\r\n    summary\r\n  },\r\n  getCandidateById(id: \"{{CANDIDATE_ID}}\") {\r\n    id\r\n    userId\r\n    firstName\r\n    lastName\r\n    summary\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update candidate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"CANDIDATE_ID\", pm.response.json().data.createCandidate.id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  updateCandidate(candidate: {\r\n    id:\"{{CANDIDATE_ID}}\", \r\n    userId:\"\", \r\n    firstName: \"firstName\", \r\n    lastName: \"lastName\", \r\n    summary: \"summary\",\r\n    linkedInUrl: null,\r\n    githubUrl: null\r\n}) {\r\n    id\r\n    userId\r\n    firstName\r\n    lastName\r\n    summary\r\n    linkedInUrl\r\n    githubUrl\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete candidate",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deleteCandidate(id: \"{{CANDIDATE_ID}}\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "education",
+					"item": [
+						{
+							"name": "query education",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"EDUCATION_ID\", pm.response.json()[0].id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n  getEducations(candidateId: \"{{CANDIDATE_ID}}\") {\r\n    id\r\n    userId\r\n    candidateId\r\n    name\r\n    startDate\r\n    endDate\r\n    graduated\r\n    areaOfStudy\r\n    educationLevel\r\n  },\r\n  getEducationById(id: \"{{EDUCATION_ID}}\") {\r\n    id\r\n    userId\r\n    candidateId\r\n    name\r\n    startDate\r\n    endDate\r\n    graduated\r\n    areaOfStudy\r\n    educationLevel\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create education",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"EDUCATION_ID\", pm.response.json().data.createEducation.id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  createEducation(education: {\r\n    id:\"\", \r\n    userId:\"\", \r\n    candidateId:\"{{CANDIDATE_ID}}\", \r\n    name: \"name\", \r\n    startDate: \"1999-08-01\", \r\n    endDate: null, \r\n    graduated: true, \r\n    educationLevel: \"DIPLOMA\",#NONE,SELF_TAUGHT,DIPLOMA,CERTIFICATE,BACHELORS,MASTERS,DOCTORATE \r\n    areaOfStudy: \"areaOfStudy\"\r\n}) {\r\n    id\r\n    userId\r\n    candidateId\r\n    name\r\n    startDate\r\n    endDate\r\n    graduated\r\n    educationLevel\r\n    areaOfStudy\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update education",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"EDUCATION_ID\", pm.response.json().data.createEducation.id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  updateEducation(education: {\r\n    id:\"{{EDUCATION_ID}}\", \r\n    userId:\"\", \r\n    candidateId:\"{{CANDIDATE_ID}}\", \r\n    name: \"name\", \r\n    startDate: \"1999-08-01\", \r\n    endDate: null, \r\n    graduated: true, \r\n    educationLevel: \"DIPLOMA\",#NONE,SELF_TAUGHT,DIPLOMA,CERTIFICATE,BACHELORS,MASTERS,DOCTORATE \r\n    areaOfStudy: \"areaOfStudy\"\r\n}) {\r\n    id\r\n    userId\r\n    candidateId\r\n    name\r\n    startDate\r\n    endDate\r\n    graduated\r\n    educationLevel\r\n    areaOfStudy\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete education",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deleteEducation(id: \"{{EDUCATION_ID}}\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "job",
+					"item": [
+						{
+							"name": "create job",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"JOB_ID\", pm.response.json().data.createJob.id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  createJob(job: {\r\n    id:\"\", \r\n    userId:\"\", \r\n    candidateId:\"{{CANDIDATE_ID}}\", \r\n    companyName: \"companyName\", \r\n    title: \"title\", \r\n    startDate: \"2014-07-01\", \r\n    endDate: \"2015-06-01\", \r\n    skills: [\"skill\"],\r\n    achievements: [\"achievement\"], \r\n    currentlyWorking: false, \r\n    reasonForLeaving: \"reasonForLeaving\"\r\n    }) {\r\n    id\r\n    userId\r\n    candidateId\r\n    companyName\r\n    title\r\n    startDate\r\n    endDate\r\n    skills\r\n    achievements\r\n    currentlyWorking\r\n    reasonForLeaving\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "query job",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"JOB_ID\", pm.response.json().data.getJobs[0].id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "query {\r\n  getJobs(candidateId: \"{{CANDIDATE_ID}}\") {\r\n    id\r\n    userId\r\n    candidateId\r\n    companyName\r\n    title\r\n    startDate\r\n    endDate\r\n    skills\r\n    achievements\r\n    currentlyWorking\r\n    reasonForLeaving\r\n  },\r\n  getJobById(id: \"{{JOB_ID}}\") {\r\n    id\r\n    userId\r\n    candidateId\r\n    companyName\r\n    title\r\n    startDate\r\n    endDate\r\n    skills\r\n    achievements\r\n    currentlyWorking\r\n    reasonForLeaving\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update job",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Fixed TypeError by adding parentheses to pm.response.json()\r",
+											"pm.environment.set(\"JOB_ID\", pm.response.json().data.updateJob.id);\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  updateJob(job: {\r\n    id:\"{{JOB_ID}}\", \r\n    userId:\"\", \r\n    candidateId:\"{{CANDIDATE_ID}}\", \r\n    companyName: \"companyName\", \r\n    title: \"title\", \r\n    startDate: \"2014-07-01\", \r\n    endDate: \"2015-06-01\", \r\n    skills: [\"skill\"],\r\n    achievements: [\"achievement\"], \r\n    currentlyWorking: false, \r\n    reasonForLeaving: \"reasonForLeaving\"\r\n}) {\r\n    id\r\n    userId\r\n    candidateId\r\n    companyName\r\n    title\r\n    startDate\r\n    endDate\r\n    skills\r\n    achievements\r\n    currentlyWorking\r\n    reasonForLeaving\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete job",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "{{USER_PASSWORD}}",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "{{USER_ID}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-GETTIMHIRED-USERNAME",
+										"value": "72293096-7a76-4caf-bcc8-ca6060fbb06a",
+										"type": "text"
+									},
+									{
+										"key": "X-GETTIMHIRED-PASSWORD",
+										"value": "e49207b9-4fae-448e-8746-25b66c14c568",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  deleteJob(id: \"{{JOB_ID}}\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "{{HOST}}/graphql",
+									"host": [
+										"{{HOST}}"
+									],
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

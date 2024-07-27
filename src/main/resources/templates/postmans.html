@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <title>Postman Downloads</title>
+</head>
+<body>
+  <div class="container">
+    <div th:insert="~{navbar}"></div>
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Postman Files</h1>
+        <p>Download the postman files
+          <a th:href="@{/postman/gettimhired.com.postman_collection.json}" download="gettimhired.com.postman_collection.json">collection</a>
+          and
+          <a th:href="@{/postman/GETTIMHIRED_PROD.postman_environment.json}" download="GETTIMHIRED_PROD.postman_environment.json">environment</a>
+        </p>
+        <p>Import the collections and then set the USER_ID and USER_PASSWORD fields to get started</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

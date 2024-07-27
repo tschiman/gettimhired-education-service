@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <title>Credentials</title>
+</head>
+<body>
+<!--    I want to have something where there is a form with no input that submits to a page
+that comes back here with two UUIDs that are displayed as the user credentials-->
+  <div class="container">
+    <div th:insert="~{navbar}"></div>
+    <div th:unless="${password}">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Account</h1>
+        </div>
+      </div>
+      <div class="row" >
+        <div class="col-md-2">
+          <span><strong>USER_ID:</strong></span>
+        </div>
+        <div class="col-md-10">
+          <span th:text="${user}"></span>
+        </div>
+        <div class="col-md-2">
+          <span><strong>EMAIL:</strong></span>
+        </div>
+        <div class="col-md-10">
+          <span th:text="${email}"></span>
+        </div>
+        <div class="col-md-12">
+          <p>Click the button to generate a User and get your credentials.</p>
+          <form action="#" th:action="@{/account}" method="post">
+            <div>
+              <button class="btn btn-default" type="submit">Generate API Password</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div th:if="${password}">
+      <div class="row" th:if="${user}">
+        <div class="col-md-12">
+          <h1>Save Credentials</h1>
+        </div>
+        <div class="col-md-2">
+          <span><strong>USER_ID:</strong></span>
+        </div>
+        <div class="col-md-10">
+          <span th:text="${user}"></span>
+        </div>
+        <div class="col-md-2">
+          <span><strong>USER_PASSWORD:</strong></span>
+        </div>
+        <div class="col-md-10">
+          <span th:text="${password}"></span>
+        </div>
+        <div class="col-md-2">
+          <span><strong>EMAIL:</strong></span>
+        </div>
+        <div class="col-md-10">
+          <span th:text="${email}"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p>Copy these values and store them in a safe place, you will not be able to see them again.</p>
+          <p>Be sure to download the postman <a th:href="@{/postman}">Postman files</a>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

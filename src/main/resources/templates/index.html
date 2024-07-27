@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <title>Get Tim Hired</title>
+</head>
+<body>
+    <div class="container">
+
+        <div th:insert="~{navbar}"></div>
+
+        <div th:unless="${hasCandidate}">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Get Tim Hired</h1>
+                </div>
+                <div class="col-md-12">
+
+                    <p>This site was built to get me hired! I'm seeking a backend Java developer role. If you have any
+                        leads, please reach out on <a href="https://www.linkedin.com/in/timothy-schimandle/">LinkedIn</a>
+                        or <a href="https://github.com/tschiman/gettimhired">GitHub</a>.</p>
+
+                    <p>I'll be continuously updating this application, transforming it into microservices, adding HTTP
+                        calls, and messaging features. Stay tuned!</p>
+
+                    <p>To get started, click the Signup link to create your credentials. Save them for API access. You
+                        can download Postman files for REST or GraphQL interactions, or use Swagger. For feedback or
+                        bug fixes, visit the <a href="https://github.com/tschiman/gettimhired">GitHub repository</a>.
+                        You can also contact me on <a href="https://www.linkedin.com/in/timothy-schimandle/">LinkedIn</a>.</p>
+
+                </div>
+                <div class="col-md-12">
+                    <p>Tools that were used to build this project include:</p>
+                </div>
+                <div class="col-md-2">
+                    <img class="img-size" src="/img/java.png" alt="Java Logo">
+                </div>
+                <div class="col-md-2">
+                    <img class="img-size" src="/img/intellij.png" alt="intellij Logo">
+                </div>
+                <div class="col-md-2">
+                    <img class="img-size" src="/img/Mongodb.png" alt="Mongodb Logo">
+                </div>
+                <div class="col-md-2">
+                    <img class="img-size" src="/img/spring.jpg" alt="spring Logo">
+                </div>
+                <div class="col-md-2">
+                    <img class="img-size" src="/img/heroku.png" alt="heroku Logo">
+                </div>
+                <div class="col-md-2">
+                    <img class="img-size" src="/img/postman.png" alt="postman Logo">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Candidates</h2>
+                </div>
+            </div>
+            <div class="row" th:each="candidate : ${candidates}">
+                <div class="col-md-12">
+                    <p>
+                        <a th:href="@{/(candidateId=${candidate.id})}" th:text="${candidate.firstName() + ' ' + candidate.lastName() }">Link</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div th:if="${hasCandidate}">
+            <div class="border" th:if="${candidate != null}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center" th:text="${candidate.firstName() + ' ' + candidate.lastName()}"></h1>
+                    </div>
+                    <div th:if="${candidate.linkedInUrl() != null}" class="col-md-6">
+                        <h3 class="text-center">
+                            <a th:href="${candidate.linkedInUrl()}">LinkedIn</a>
+                        </h3>
+                    </div>
+                    <div th:if="${candidate.githubUrl() != null}" class="col-md-6">
+                        <h3 class="text-center">
+                            <a th:href="${candidate.githubUrl()}">Github</a>
+                        </h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-center padding-15" th:text="${candidate.summary()}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="border" th:if="${jobs.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">Job History</h2>
+                    </div>
+                </div>
+                <div class="border-dashed" th:each="job : ${jobs}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h4 class="text-center" th:text="${job.companyName()}"></h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-center" th:text="${job.title()}"></h4>
+                        </div>
+                        <div class="col-md-4">
+                            <h4 class="text-center" th:text="${'From: ' + job.startDate() + ' To: ' + (job.endDate() == null ? 'Present' : job.endDate())}"></h4>
+                        </div>
+                    </div>
+                    <div class="row" th:if="${job.skills().size() > 0 || job.achievements().size() > 0}">
+                        <div class="col-md-6 border-dotted">
+                            <h3 class="text-center" th:if="${job.skills().size() > 0}">Skills</h3>
+                        </div>
+                        <div class="col-md-6 border-dotted">
+                            <h3 class="text-center" th:if="${job.achievements().size() > 0}">Achievements</h3>
+                        </div>
+                    </div>
+                    <div class="row parent" th:if="${job.skills().size() > 0 || job.achievements().size() > 0}">
+                        <div class="col-md-6 border-dotted child">
+                            <table class="table table-striped" th:if="${job.skills().size() > 0}">
+                                <tbody>
+                                    <tr th:if="${job.skills().size() % 5 != 0}" th:each="i : ${#numbers.sequence(0, job.skills().size() / 5)}">
+                                        <td th:text="${job.skills().get(i*5)}"></td>
+
+                                        <td th:if="${i*5 + 1 < job.skills().size()}" th:text="${job.skills().get(i*5 + 1)}"></td>
+                                        <td th:if="${i*5 + 1 >= job.skills().size()}"> </td>
+
+                                        <td th:if="${i*5 + 2 < job.skills().size()}" th:text="${job.skills().get(i*5 + 2)}"></td>
+                                        <td th:if="${i*5 + 2 >= job.skills().size()}"> </td>
+
+                                        <td th:if="${i*5 + 3 < job.skills().size()}" th:text="${job.skills().get(i*5 + 3)}"></td>
+                                        <td th:if="${i*5 + 3 >= job.skills().size()}"> </td>
+
+                                        <td th:if="${i*5 + 4 < job.skills().size()}" th:text="${job.skills().get(i*5 + 4)}"></td>
+                                        <td th:if="${i*5 + 4 >= job.skills().size()}"> </td>
+                                    </tr>
+                                    <tr th:if="${job.skills().size() % 5 == 0}" th:each="i : ${#numbers.sequence(0, (job.skills().size() - 1) / 5)}">
+                                        <td th:text="${job.skills().get(i*5)}"></td>
+
+                                        <td th:if="${i*5 + 1 < job.skills().size()}" th:text="${job.skills().get(i*5 + 1)}"></td>
+                                        <td th:if="${i*5 + 1 >= job.skills().size()}"> </td>
+
+                                        <td th:if="${i*5 + 2 < job.skills().size()}" th:text="${job.skills().get(i*5 + 2)}"></td>
+                                        <td th:if="${i*5 + 2 >= job.skills().size()}"> </td>
+
+                                        <td th:if="${i*5 + 3 < job.skills().size()}" th:text="${job.skills().get(i*5 + 3)}"></td>
+                                        <td th:if="${i*5 + 3 >= job.skills().size()}"> </td>
+
+                                        <td th:if="${i*5 + 4 < job.skills().size()}" th:text="${job.skills().get(i*5 + 4)}"></td>
+                                        <td th:if="${i*5 + 4 >= job.skills().size()}"> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6 border-dotted child">
+                            <ul th:if="${job.achievements().size() > 0}">
+                                <li th:each="achievement : ${job.achievements()}" th:text="${achievement}"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row" th:if="${job.reasonForLeaving() != null}">
+                        <div class="col-md-2">
+                            <h5 class="text-center">Reason For Leaving: </h5>
+                        </div>
+                        <div class="col-md-10">
+                            <h5 class="text-left" th:text="${job.reasonForLeaving()}"></h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border" th:if="${educations.size() > 0}">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="text-center">Education</h2>
+                    </div>
+                </div>
+                <div class="row border-dashed" th:each="education : ${educations}">
+                    <div class="col-md-4 text-center" th:text="${education.name()}"></div>
+                    <div class="col-md-4 text-center" th:text="${education.areaOfStudy()}"></div>
+                    <div class="col-md-4 text-center" th:text="${education.educationLevel()}"></div>
+                    <div class="col-md-4 text-center" th:text="${education.graduated() ? 'Graduated' : 'Incomplete'}"></div>
+                    <div class="col-md-4 text-center"
+                         th:text="${education.endDate() != null ?
+                         education.startDate() + ' to ' + education.endDate() :
+                         education.startDate() + ' to Present'}"
+                    >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
