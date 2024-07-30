@@ -10,6 +10,7 @@ import com.gettimhired.repository.EducationRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.client.RestClient;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,11 +24,13 @@ import static org.mockito.Mockito.*;
 class EducationServiceTest {
     private EducationService educationService;
     private EducationRepository educationRepository;
+    private RestClient restClient;
 
     @BeforeEach
     public void init() {
+        restClient = mock(RestClient.class);
         educationRepository = mock(EducationRepository.class);
-        educationService = new EducationService(educationRepository);
+        educationService = new EducationService(educationRepository, restClient);
     }
 
     @Test

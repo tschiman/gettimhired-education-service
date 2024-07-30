@@ -8,8 +8,11 @@ import com.gettimhired.repository.EducationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,9 +21,11 @@ public class EducationService {
 
     Logger log = LoggerFactory.getLogger(EducationService.class);
     private final EducationRepository educationRepository;
+    private final RestClient resumeSiteRestClient;
 
-    public EducationService(EducationRepository educationRepository) {
+    public EducationService(EducationRepository educationRepository, RestClient resumeSiteRestClient) {
         this.educationRepository = educationRepository;
+        this.resumeSiteRestClient = resumeSiteRestClient;
     }
 
     public List<EducationDTO> findAllEducationsForUserAndCandidateId(String userId, String candidateId) {
@@ -111,5 +116,29 @@ public class EducationService {
                     }
                     return e2.endDate().compareTo(e1.endDate());
                 }).toList();
+    }
+
+    public void migrate() {
+        ResponseEntity<EducationDTO[]> educationResponse = resumeSiteRestClient
+                .get()
+                .uri("/api/candidates/all/educations/migrate")
+                .retrieve()
+                .toEntity(EducationDTO[].class);
+
+        if (educationResponse.hasBody() && educationResponse.getBody() != null) {
+            Arrays.stream(educationResponse.getBody())
+                    .map(e -> new Education(
+                            e.id(),
+                            e.userId(),
+                            e.candidateId(),
+                            e.name(),
+                            e.startDate(),
+                            e.endDate(),
+                            e.graduated(),
+                            e.areaOfStudy(),
+                            e.educationLevel()
+                    ))
+                    .forEach(educationRepository::save);
+        }
     }
 }
