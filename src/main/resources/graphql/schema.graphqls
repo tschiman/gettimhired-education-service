@@ -5,7 +5,7 @@ type Query {
 
 type Mutation {
     createEducation(education: EducationInput, userId: String!): Education
-    updateEducation(education: EducationInput): Education
+    updateEducation(education: EducationInput, userId: String!, id: String!, candidateId: String!): Education
     deleteEducation(id: String): Boolean
 }
 
@@ -23,7 +23,7 @@ type Education {
 input EducationInput {
     id: ID
     userId: String
-    candidateId: String!
+    candidateId: String
     name: String!
     startDate: String
     endDate: String

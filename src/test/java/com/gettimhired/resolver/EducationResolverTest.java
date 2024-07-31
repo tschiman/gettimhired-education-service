@@ -96,7 +96,7 @@ class EducationResolverTest {
         when(userDetails.getUsername()).thenReturn("user1");
         when(educationService.updateEducation("1", "user1", "candidate1", educationUpdateDTO)).thenReturn(Optional.of(educationDTO));
 
-        EducationDTO result = educationResolver.updateEducation(userDetails, educationInputDTO);
+        EducationDTO result = educationResolver.updateEducation(userDetails, educationInputDTO, "user1", "1", "candidate1");
 
         assertEquals(educationDTO, result);
 
