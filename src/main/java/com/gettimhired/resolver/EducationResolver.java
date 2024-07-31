@@ -89,4 +89,15 @@ public class EducationResolver {
         log.info("GQL getEducationsByCandidateId candidateId={}", candidateId);
         return educationService.findAllEducationsByCandidateId(candidateId);
     }
+
+    @MutationMapping
+    @PreAuthorize("isAuthenticated()")
+    public boolean deleteEducationByCandidateAndUser(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @Argument String userId,
+            @Argument String candidateId
+    ) {
+        log.info("GQL deleteEducationByCandidateAndUser userId={} candidateId={}", userId, candidateId);
+        return educationService.deleteEducationByCandidate(candidateId, userId);
+    }
 }

@@ -141,4 +141,14 @@ public class EducationService {
                     .forEach(educationRepository::save);
         }
     }
+
+    public boolean deleteEducationByCandidate(String candidateId, String userId) {
+        try {
+            educationRepository.deleteByCandidateIdAndUserId(candidateId, userId);
+            return true;
+        } catch (Exception e) {
+            log.error("deleteEducationByCandidate candidateId={} userId={}", candidateId, userId, e);
+            return false;
+        }
+    }
 }

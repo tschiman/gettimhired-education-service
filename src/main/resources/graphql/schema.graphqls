@@ -8,6 +8,7 @@ type Mutation {
     createEducation(education: EducationInput, userId: String!): Education
     updateEducation(education: EducationInput, userId: String!, id: String!, candidateId: String!): Education
     deleteEducation(id: String!, userId: String!): Boolean
+    deleteEducationByCandidateAndUser(userId: String!, candidateId: String!): Boolean
 }
 
 type Education {
