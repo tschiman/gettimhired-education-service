@@ -117,7 +117,7 @@ class EducationResolverTest {
         when(userDetails.getUsername()).thenReturn("user1");
         when(educationService.deleteEducation("1", "user1")).thenReturn(true);
 
-        boolean result = educationResolver.deleteEducation(userDetails, "1");
+        boolean result = educationResolver.deleteEducation(userDetails, "1", "user1");
 
         assertEquals(true, result);
 

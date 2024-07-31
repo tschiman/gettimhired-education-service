@@ -71,8 +71,22 @@ public class EducationResolver {
 
     @MutationMapping
     @PreAuthorize("isAuthenticated()")
-    public boolean deleteEducation(@AuthenticationPrincipal UserDetails userDetails, @Argument String id) {
-        log.info("GQL deleteEducation userId={} id={}", userDetails.getUsername(), id);
-        return educationService.deleteEducation(id, userDetails.getUsername());
+    public boolean deleteEducation(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @Argument String id,
+            @Argument String userId
+    ) {
+        log.info("GQL deleteEducation userId={} id={}", userId, id);
+        return educationService.deleteEducation(id, userId);
+    }
+
+    @QueryMapping
+    @PreAuthorize("isAuthenticated()")
+    public List<EducationDTO> getEducationsByCandidateId(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @Argument String candidateId
+    ) {
+        log.info("GQL getEducationsByCandidateId candidateId={}", candidateId);
+        return educationService.findAllEducationsByCandidateId(candidateId);
     }
 }

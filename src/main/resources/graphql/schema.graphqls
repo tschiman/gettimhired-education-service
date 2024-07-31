@@ -1,12 +1,13 @@
 type Query {
     getEducations(candidateId: String!, userId: String!): [Education]
+    getEducationsByCandidateId(candidateId: String!): [Education]
     getEducationById(id: ID!, userId: String!): Education
 }
 
 type Mutation {
     createEducation(education: EducationInput, userId: String!): Education
     updateEducation(education: EducationInput, userId: String!, id: String!, candidateId: String!): Education
-    deleteEducation(id: String): Boolean
+    deleteEducation(id: String!, userId: String!): Boolean
 }
 
 type Education {
