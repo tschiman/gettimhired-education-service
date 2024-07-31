@@ -41,9 +41,9 @@ public class EducationResolver {
 
     @QueryMapping
     @PreAuthorize("isAuthenticated()")
-    public EducationDTO getEducationById(@AuthenticationPrincipal UserDetails userDetails, @Argument String id) {
-        log.info("GQL getEducationById userId={} id={}", userDetails.getUsername(), id);
-        return educationService.findEducationByIdAndUserId(id, userDetails.getUsername()).orElse(null);
+    public EducationDTO getEducationById(@AuthenticationPrincipal UserDetails userDetails, @Argument String id, @Argument String userId) {
+        log.info("GQL getEducationById userId={} id={}", userId, id);
+        return educationService.findEducationByIdAndUserId(id, userId).orElse(null);
     }
 
     @MutationMapping

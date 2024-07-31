@@ -54,7 +54,7 @@ class EducationResolverTest {
         when(userDetails.getUsername()).thenReturn("user1");
         when(educationService.findEducationByIdAndUserId("1", "user1")).thenReturn(Optional.of(education));
 
-        EducationDTO result = educationResolver.getEducationById(userDetails, "1");
+        EducationDTO result = educationResolver.getEducationById(userDetails, "1", "user1");
 
         assertEquals(education, result);
 

@@ -1,6 +1,6 @@
 type Query {
     getEducations(candidateId: String!, userId: String!): [Education]
-    getEducationById(id: ID!): Education
+    getEducationById(id: ID!, userId: String!): Education
 }
 
 type Mutation {
