@@ -48,9 +48,13 @@ public class EducationResolver {
 
     @MutationMapping
     @PreAuthorize("isAuthenticated()")
-    public EducationDTO createEducation(@AuthenticationPrincipal UserDetails userDetails, @Argument @Valid EducationInputDTO education) {
-        log.info("GQL createEducation userId={} candidateId={}", userDetails.getUsername(), education.candidateId());
-        return educationService.createEducation(userDetails.getUsername(), education.candidateId(), new EducationDTO(education)).orElse(null);
+    public EducationDTO createEducation(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @Argument @Valid EducationInputDTO education,
+            @Argument String userId
+    ) {
+        log.info("GQL createEducation userId={} candidateId={}", userId, education.candidateId());
+        return educationService.createEducation(userId, education.candidateId(), new EducationDTO(education)).orElse(null);
     }
     @MutationMapping
     @PreAuthorize("isAuthenticated()")

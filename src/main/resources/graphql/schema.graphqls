@@ -4,7 +4,7 @@ type Query {
 }
 
 type Mutation {
-    createEducation(education: EducationInput): Education
+    createEducation(education: EducationInput, userId: String!): Education
     updateEducation(education: EducationInput): Education
     deleteEducation(id: String): Boolean
 }
