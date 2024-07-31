@@ -57,7 +57,7 @@ class EducationResolverIT {
 
         graphQlTester.document("""
                         query {
-                          getEducations(candidateId: "1") {
+                          getEducations(candidateId: "1", userId: "user1") {
                             id
                             userId
                             candidateId
@@ -88,7 +88,7 @@ class EducationResolverIT {
 
         graphQlTester.document("""
                         query {
-                          getEducationById(id: "1") {
+                          getEducationById(id: "1", userId: "user1") {
                                id
                                userId
                                candidateId
@@ -118,7 +118,7 @@ class EducationResolverIT {
 
         graphQlTester.document("""
                         query {
-                          getEducationById(id: "1") {
+                          getEducationById(id: "1", userId: "user1") {
                                id
                                userId
                                candidateId
@@ -159,7 +159,7 @@ class EducationResolverIT {
                             graduated: true,
                             educationLevel: "DIPLOMA",
                             areaOfStudy: "Fake"
-                        }) {
+                        }, userId: "user1") {
                             id
                             userId
                             candidateId
@@ -197,7 +197,7 @@ class EducationResolverIT {
                              graduated: true,
                              educationLevel: "DIPLOMA",
                              areaOfStudy: "Fake"
-                         }) {
+                         }, userId: "user1") {
                              id
                              userId
                              candidateId
@@ -237,7 +237,7 @@ class EducationResolverIT {
                              graduated: true,
                              educationLevel: "BACHELORS",
                              areaOfStudy: "Math"
-                         }) {
+                         }, userId: "user1", id: "1", candidateId: "1") {
                              id
                              userId
                              candidateId
@@ -276,7 +276,7 @@ class EducationResolverIT {
                              graduated: true,
                              educationLevel: "BACHELORS",
                              areaOfStudy: "Math"
-                         }) {
+                         }, userId: "user1", id: "1", candidateId: "1") {
                              id
                              userId
                              candidateId
@@ -305,7 +305,7 @@ class EducationResolverIT {
 
         graphQlTester.document("""
                         mutation {
-                            deleteEducation(id: "1")
+                            deleteEducation(id: "1", userId: "user1")
                         }
                         """)
                 .execute();
@@ -322,7 +322,7 @@ class EducationResolverIT {
 
         graphQlTester.document("""
                         mutation {
-                            deleteEducation(id: "1")
+                            deleteEducation(id: "1", userId: "user1")
                         }
                         """)
                 .execute();

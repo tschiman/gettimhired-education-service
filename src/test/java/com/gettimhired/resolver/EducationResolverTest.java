@@ -45,7 +45,6 @@ class EducationResolverTest {
         verify(educationService, times(1)).findAllEducationsForUserAndCandidateId(userIdCaptor.capture(), candidateIdCaptor.capture());
         assertEquals("user1", userIdCaptor.getValue());
         assertEquals("candidate1", candidateIdCaptor.getValue());
-        verify(userDetails, times(2)).getUsername();
     }
 
     @Test
@@ -63,7 +62,6 @@ class EducationResolverTest {
         verify(educationService, times(1)).findEducationByIdAndUserId(idCaptor.capture(), userIdCaptor.capture());
         assertEquals("1", idCaptor.getValue());
         assertEquals("user1", userIdCaptor.getValue());
-        verify(userDetails, times(2)).getUsername();
     }
 
     @Test
@@ -85,7 +83,6 @@ class EducationResolverTest {
         assertEquals("user1", userIdCaptor.getValue());
         assertEquals("candidate1", candidateIdCaptor.getValue());
         assertEquals(educationDTO, educationCaptor.getValue());
-        verify(userDetails, times(2)).getUsername();
     }
 
     @Test
@@ -109,7 +106,6 @@ class EducationResolverTest {
         assertEquals("user1", userIdCaptor.getValue());
         assertEquals("candidate1", candidateIdCaptor.getValue());
         assertEquals(educationUpdateDTO, updateCaptor.getValue());
-        verify(userDetails, times(2)).getUsername();
     }
 
     @Test
@@ -126,7 +122,6 @@ class EducationResolverTest {
         verify(educationService, times(1)).deleteEducation(idCaptor.capture(), userIdCaptor.capture());
         assertEquals("1", idCaptor.getValue());
         assertEquals("user1", userIdCaptor.getValue());
-        verify(userDetails, times(2)).getUsername();
     }
 
 }
