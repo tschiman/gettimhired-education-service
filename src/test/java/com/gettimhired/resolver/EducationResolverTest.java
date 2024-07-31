@@ -36,7 +36,7 @@ class EducationResolverTest {
         when(userDetails.getUsername()).thenReturn("user1");
         when(educationService.findAllEducationsForUserAndCandidateId("user1", "candidate1")).thenReturn(Collections.emptyList());
 
-        List<EducationDTO> result = educationResolver.getEducations(userDetails, "candidate1");
+        List<EducationDTO> result = educationResolver.getEducations(userDetails, "candidate1", "user1");
 
         assertEquals(Collections.emptyList(), result);
 

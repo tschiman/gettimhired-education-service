@@ -30,9 +30,13 @@ public class EducationResolver {
 
     @QueryMapping
     @PreAuthorize("isAuthenticated()")
-    public List<EducationDTO> getEducations(@AuthenticationPrincipal UserDetails userDetails, @Argument String candidateId) {
-        log.info("GQL getEducations userId={} candidateId={}", userDetails.getUsername(), candidateId);
-        return educationService.findAllEducationsForUserAndCandidateId(userDetails.getUsername(), candidateId);
+    public List<EducationDTO> getEducations(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @Argument String candidateId,
+            @Argument String userId
+    ) {
+        log.info("GQL getEducations userId={} candidateId={}", userId, candidateId);
+        return educationService.findAllEducationsForUserAndCandidateId(userId, candidateId);
     }
 
     @QueryMapping
